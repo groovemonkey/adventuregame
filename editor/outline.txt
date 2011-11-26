@@ -1,0 +1,59 @@
+Structure of locations: locations have a list of possible exit-points (next locations) based on the 
+choices made in their dialogue.  Locations can link to LOCATIONS and EVENTS as exit points.  Essentially, 
+both LOCATIONS and EVENTS are started from actions that are possible inside of locations.
+
+
+goal: to have an editor for creating new locations (adding them to a locations file), and
+										events (adding them to an events file).
+
+Each type of content creation has its own wizard associated with it.
+									
+
+use case:
+the writer opens this application and sees a MAIN MENU.  He chooses whether he wants to 
+write a LOCATION or an EVENT.
+
+This launches the appropriate wizard:
+
+COMMON FUNCTIONS -- each wizard:
+lets you choose an input file (INPUTFILEFUNCTION)
+scans input file for locations and their possible choices (choices are triggers for events)
+gives you a numbered list of locations and their choices
+builds the <event/location>:
+	What location-choice is this attached to?
+
+
+LOCATION_WIZARD:
+	location name (in-program, checked to make sure it's unique)
+	location description
+	add a choice wizard:
+		one choice minimum
+		choice asks for: user-input-text, choice-description, location-exit (the place you go to if you pick that choice)
+		after that: "would you like to add another choice?"
+	
+	
+
+
+EVENT_WIZARD:
+
+
+
+
+
+LOCATION STRUCTURE:
+ingame: get the current location object. display its description. access the choice dictionary:
+for each choice,
+	display the userinput-text, the choice-description (don't display the location-exit or the making-choice-description)
+Ask the player what to do:
+	if the input is a valid userinput-text from the choices,
+		give the making-choice-description
+		run the given choice (choice.choose)
+	else, ask again
+
+
+
+CHANGING LOCATION
+	choices put the chosen location-exit into a variable that gets parsed every turn, as part of the 
+	"new turn" loop.  The object that has that location name will become the new "currentlocation" 
+	object, when that "new turn" function runs.
+

@@ -1,0 +1,5 @@
+In no particular order:
+
+-player input handling
+-main screen
+-ability to save and load games
