@@ -13,7 +13,7 @@ class Choice
   end
   
   def display_choice(command)
-    puts "#{command} -- #{@choice_description}"
+    puts "#{command} -- #{@choice_description}" unless @choice_description == ""
   end
   
   def choose

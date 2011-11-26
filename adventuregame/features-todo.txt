@@ -1,6 +1,5 @@
 In no particular order:
 
--split game files!! locations and choices in a separate file.
 -player input handling
 -main screen
 -ability to save and load games
@@ -8,3 +7,5 @@ In no particular order:
 
 
 DONE:
+-split game files!! locations and choices in a separate file.
+

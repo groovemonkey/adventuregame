@@ -5,7 +5,7 @@ Locations = {"testlocation" => Location.new(
         description="you are standing in a test location, looking around at the blank white nothingness.",
         choices = {
           "go to vienna" => Choice.new(
-                choice_description="hop on a plane and go to vienna",
+                choice_description="",
                 location_exit="vienna",
                 making_choice_description="You run to the nearest airport, buy a ticket, and get on a plane to Vienna."
           )
