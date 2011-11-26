@@ -18,7 +18,7 @@ class Choice
   
   def choose
     puts @making_choice_description
-    Player1.change_location = @location_exit
+    Player1.change_location(@location_exit)
   end
   
 end

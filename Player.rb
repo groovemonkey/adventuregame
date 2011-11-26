@@ -6,7 +6,7 @@ class Player
   
   
   def change_location(newlocation)
-    @currentlocation = newlocation
+    @currentlocation = Locations[newlocation]
   end
   
   
@@ -21,6 +21,3 @@ class Player
   
   
 end
-
-#instantiate player
-#player = Player.new
