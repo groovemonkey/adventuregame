@@ -1,5 +1,11 @@
 In no particular order:
 
+
+-locations -- add a "save" method that writes the current state of the location
+-abstract the editing functions out of the adventuregame Location class code (just open and edit the classes in
+	the editor code)
+
+
 -player input handling
 -main screen
 -ability to save and load games

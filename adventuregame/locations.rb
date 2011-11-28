@@ -8,7 +8,7 @@ Locations = {"testlocation" => Location.new(
                 choice_description="",
                 location_exit="vienna",
                 making_choice_description="You run to the nearest airport, buy a ticket, and get on a plane to Vienna."
-          )
+          ),
         }
 
 ),

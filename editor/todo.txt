@@ -1,0 +1,18 @@
+TODO:
+
+-the "location exit" for choices isn't set correctly
+-add some way of telling WHERE you are in the creation process:
+		-you're now creating the choice that will lead to your new location
+		-you're now creating your location's description
+		-you're now adding choices for your location
+		-etc.
+
+-proper "quit" loops and breaks.
+-better text descriptions
+-ability to save the updated "Locations" hash to the locations file, with proper syntax so it can be eval'd again next time.
+
+
+
+DONE
+-location selection list (scan file)
+-the "type 'self' to refer to your location' thing won't work anymore -- delete?"
