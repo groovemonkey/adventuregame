@@ -1,18 +1,21 @@
 TODO:
+		
+-delete what's in the location file before writing to it (make backup first?)
+-complete deletion of a location and all choice-references to it.
 
--the "location exit" for choices isn't set correctly
+
+DONE
+-location selection list (scan file)
+-to make a location-exit come out where you already are (no location change), leave it blank ("").
+		Eval blank location_exits to mean NO LOCATION CHANGE (use the current location's name) during the moving process.
+-better text descriptions
+-ability to save the updated "Locations" hash to the locations file, with proper syntax so it can be eval'd again next time.
+-proper "quit" loops and breaks.
 -add some way of telling WHERE you are in the creation process:
 		-you're now creating the choice that will lead to your new location
 		-you're now creating your location's description
 		-you're now adding choices for your location
 		-etc.
-
--proper "quit" loops and breaks.
--better text descriptions
--ability to save the updated "Locations" hash to the locations file, with proper syntax so it can be eval'd again next time.
+-the "location exit" for choices isn't set correctly-the "location exit" for choices isn't set correctly
 
 
-
-DONE
--location selection list (scan file)
--the "type 'self' to refer to your location' thing won't work anymore -- delete?"

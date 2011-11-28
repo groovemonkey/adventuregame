@@ -19,7 +19,12 @@ class Choice
   
   def choose
     puts @making_choice_description
-    Player1.change_location(@location_exit)
+    if @location_exit == ""
+      puts "DEBUG: Back to the location you were in."
+    else
+      Player1.change_location(@location_exit)
+    end
+    
   end
   
 end
@@ -51,12 +56,18 @@ class Location
   end
   
   
-  def add_choice
-    #should only be called from the editor
+  def add_choice(is_new_entrance, location_name)
+    # called from the editor.  Used for adding choices to create an entry point for a new location,
+    # and adding choices to that new location
   
       command = input("What player-input should select this choice?")
       choice_description = input("What description should show up with this command?  To make this a 'secret' command, just leave this blank.")
-      location_exit = input("What location should this choice link to?")
+      if is_new_entrance == "new_entrance"
+        location_exit = location_name
+      else
+        location_exit = input("What location should this choice link to? (leave blank to stay at your current location.)")
+      end
+      
       
       making_choice_description = input("What should be displayed after the player chooses this?")
   
