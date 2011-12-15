@@ -1,12 +1,17 @@
 In no particular order:
 
+-thenet -- full testing; get it working properly
+-put existing locations from /code/adventuregame into the location file --
+		(read the old location class, read in the file, and port it over into new location-class objects.  save normally.)
+
+-port content from old adventuregame
 
 -locations -- add a "save" method that writes the current state of the location
 -abstract the editing functions out of the adventuregame Location class code (just open and edit the classes in
 	the editor code)
 
 
--player input handling
+-player input handling (use code from old adventuregame)
 -main screen
 -ability to save and load games
 

@@ -1,8 +1,8 @@
 Locations = {"testlocation" => Location.new(
         description="you are standing in a test location, looking around at the blank white nothingness.",
-        choices = {"go to vienna" => Choice.new(
+        choices = {"go to loc1" => Choice.new(
                   choice_description="You go to vienna",
-                  location_exit="thenet",
+                  location_exit="loc1",
                   making_choice_description="You run to the nearest airport, buy a ticket, and get on a plane to Vienna."
             ),}),
 
@@ -34,5 +34,61 @@ Locations = {"testlocation" => Location.new(
                   making_choice_description="you drive back to the city, refreshed after your jaunt to the countryside."
             ),}),
 
+"loc1" => Location.new(
+        description="
 
+You are standing in an overcrowded Hong Kong Cybercafe.
+Waitresses are doing the best they can to keep up with
+demand for drinks, and you are secretly thankful that you
+didn't come here for the booze.
+
+East is the exit -- a large doorway decorated in red and gold,
+                    leading out into the Hong Kong night.
+
+West is a computer terminal -- exactly what you're looking for.
+
+",
+        choices = {"north" => Choice.new(
+                  choice_description="",
+                  location_exit="loc1",
+                  making_choice_description="
+
+There's nothing here except for a huge room lined with computer terminals,
+and the people jacked into them.
+
+"
+            ),"east" => Choice.new(
+                  choice_description="exit to city",
+                  location_exit="hongkong",
+                  making_choice_description="
+You slowly make your way through the crowd, eventually reaching the exit.
+The warm night air feels good on your face, even though the smell could be
+better.
+
+You're back in the city.
+
+"
+            ),
+            "south" => Choice.new(
+                  choice_description="",
+                  location_exit="loc1",
+                  making_choice_description="
+
+There's nothing here except for a huge room lined with computer terminals,
+and the people jacked into them.
+
+"
+            ),
+            "west" => Choice.new(
+                  choice_description="log on to the net",
+                  location_exit="thenet",
+                  making_choice_description="
+
+You sit down at the empty computer terminal, make sure the connectors are
+clean, and jack into the Net.  A familiar rush washes over you, and the
+noise of the Cyber-Cafe crowds disappears.
+
+"
+            ),}),
+            
 }

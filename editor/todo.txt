@@ -1,5 +1,6 @@
 TODO:
-		
+
+-numbered list of locations -- number selects the correct location (range between 0..Locations.len()?)		
 -delete what's in the location file before writing to it (make backup first?)
 -complete deletion of a location and all choice-references to it.
 

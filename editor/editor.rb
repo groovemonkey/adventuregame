@@ -1,7 +1,7 @@
 require_relative '../adventuregame/Location'
-eval File.read('../adventuregame/locations.rb')
+eval File.read('../adventuregame/content/locations.rb')
 #eval File.read('../adventuregame/locations.rb')
-Locationfile = '../adventuregame/locations.rb'
+Locationfile = '../adventuregame/content/locations.rb'
 
 def input(prompt)
   print "\n\n" +prompt + "\n\n->"
