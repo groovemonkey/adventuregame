@@ -21,6 +21,8 @@ class Choice
     puts @making_choice_description
     if @location_exit == ""
       puts "DEBUG: Back to the location you were in."
+    elsif @location_exit == "thenet"
+      thenet(50)
     else
       Player1.change_location(@location_exit)
     end

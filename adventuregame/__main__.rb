@@ -1,7 +1,8 @@
 require_relative "Player"
 require_relative "Location"
 
-eval File.read('locations.rb')
+eval File.read('content/locations.rb')
+eval File.read('content/thenet.rb')
 
 
 # instantiate player global

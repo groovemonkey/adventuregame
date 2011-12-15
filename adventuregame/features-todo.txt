@@ -13,5 +13,7 @@ In no particular order:
 
 
 DONE:
--split game files!! locations and choices in a separate file.
+-split game files!! locations in a separate file.
+-added thenet as a separate location, special input handling for "choose" function to differentiate between
+a regular location and "thenet"
 
