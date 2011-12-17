@@ -3,6 +3,7 @@ emaildict = ""
 
 ## Message class -- TODO: implement DATE received -- grab from main game when @unlocked becomes true
 class Message
+  attr_accessor :id, :senderemail, :sendername, :subj, :body, :unlocked
     def initialize(id, senderemail, sendername, subj, body, unlocked=false)
         @id = id
         @senderemail = senderemail
@@ -66,6 +67,7 @@ $newslist = {1 => newsitem1}
 
 ## Dossier Class
 class Dossier
+  attr_accessor :id, :title, :knowable_list, :full_dossier, :unlocked
     def initialize(id, title, knowable_list, full_dossier, unlocked=false)
         @id = id
         @title = title
@@ -95,7 +97,7 @@ unlocked = false
 )
 
 # dossier-list
-dossierlist = {"1" => testdossier,"2" => dossier2}
+$dossierlist = {"1" => testdossier,"2" => dossier2}
 
 ## Strings that I'll be using often...
 
@@ -145,8 +147,7 @@ $mail_screen_nomail = "
     |Type 'exit' to return to the home screen.
 
 ------------------------------------------------------------------
-
-> "
+"
 
 $mail_screen_hasmail = "
 
@@ -169,10 +170,9 @@ $mail_screen_hasmail = "
     |Type 'exit' to return to the home screen.
 
 ------------------------------------------------------------------
+"
 
-> "
-
-research_screen_header = "--------------------------------------
+$research_screen_header = "--------------------------------------
 home  | mail | research |
               ---------"
 
@@ -181,14 +181,17 @@ home  | mail | research |
 ##################################################################
 # research loop
 def do_research
+  #TODO: stupid Globals
+  research_screen_header = $research_screen_header
+  dossierlist = $dossierlist
+  
     #display dossier list (unlocked dossiers only)
     dossierchoice = "None"
     while dossierchoice.downcase != "exit"
         puts(research_screen_header)
         puts("\n\nID   Dossier\n")
-        for key in dossierlist
-            ##puts("DEBUG - this is the current dossierlist key" + str(dossierlist[key]))
-            ##puts("DEBUG - its unlocked state is " + str(dossierlist[key].unlocked))
+        
+        for key, value in dossierlist
             # for all unlocked dossiers, puts the ID and Title to the list
             if dossierlist[key].unlocked == true
                 puts(dossierlist[key].id + "    " + dossierlist[key].title)
@@ -197,8 +200,8 @@ def do_research
                 
         # TODO: Can I break this out of the current loop??  Cleaner?
         #get input -- dossier # or "research"
-        puts "\n\nEnter the ID of the dossier you want to read.\nTo compile a new dossier on someone, type 'new'.  To exit, type 'exit'.\n\n>"
-        dossierchoice = gets().downcase.chomp!
+        puts "\n\n.\n\n>"
+        dossierchoice = input("Enter the ID of the dossier you want to read.\nTo compile a new dossier on someone, type 'new'.  To exit, type 'exit'.")
         
         # if player chooses an empty string, return to main menu
         if dossierchoice == ""
@@ -207,21 +210,16 @@ def do_research
         #if research, start the research wizard
         elsif dossierchoice == "new"
             #get the knowable items
-            puts "Enter the first and last name of the person you're looking for:\n\n>"
-            name = gets().downcase.chomp!
-            puts "Enter the street address, in the format <123 Main Street>\n\n>"
-            address = gets().downcase.chomp!
-            puts "Enter the OneWorld Safety ID\n\n>"
-            ssn = gets().downcase.chomp!
-            puts "Enter the SocialNet ID/e-mail of the person, if known\n\n>"
-            socialnet = gets().downcase.chomp!
-            puts "Enter an employer for the person you're searching for.\n\n>"
-            employer = gets().downcase.chomp!
+            name = input("Enter the first and last name of the person you're looking for:")
+            address = input("Enter the street address, in the format <123 Main Street>")
+            ssn = input("Enter that person's OneWorld Safety ID")
+            socialnet = input("Enter the SocialNet ID/e-mail of the person")
+            employer = input("Enter an employer for the person you're searching for.")
             
             playerlist = [name, address, ssn, socialnet, employer]
             
             
-            for key in dossierlist
+            for key, value in dossierlist
                 workinglist = dossierlist[key].knowable_list.dup
                 ## TODO: come up with a message that tells you when you've failed to build a dossier                
                 #initialize the counter
@@ -229,19 +227,20 @@ def do_research
                 for item in playerlist
                     if workinglist.include? item
                         correct += 1
-                        # if we get 3 correct, we're looking at the right dossier
-                        if correct >= 3
-                            # if it's already been unlocked, tell the player
-                            if dossierlist[key].unlocked == true
-                                puts("\n\nThankfully you didn't spend too much time looking into this -- turns out, you already have a dossier on this person!  It's " + dossierlist[key].title + "!\n\n")
-                            else
-                                puts("After working for several hours, you manage to put together a dossier.\n\n")
-                                #unlock the currently selected dossier
-                                dossierlist[key].unlocked = true
-                                #show the currently selected dossier
-                                puts("\n\n" + dossierlist[key].full_dossier + "\n\n")
-                            end
-                       end
+                    end
+                end
+                # if we get 3 correct, we're looking at the right dossier
+                if correct >= 3
+                  # if it's already been unlocked, tell the player
+                  if dossierlist[key].unlocked == true
+                    puts("\n\nThankfully you didn't spend too much time looking into this -- turns out, you already have a dossier on this person!  It's " + dossierlist[key].title + "!\n\n")
+                  else
+                    puts("After working for several hours, you manage to put together a dossier.\n\n")
+                    #unlock the currently selected dossier
+                    dossierlist[key].unlocked = true
+                    #show the currently selected dossier
+                    puts("\n\n" + dossierlist[key].full_dossier + "\n\n")
+
                     end
                 end
             end
@@ -249,7 +248,7 @@ def do_research
             
         # otherwise it's a dossier ID # --> get the corresponding dossier
         else
-            for key in dossierlist
+            for key, value in dossierlist
                 if dossierchoice == key
                     puts("\n\nDossier Selected:  " + dossierlist[key].title)
                     puts(dossierlist[key].full_dossier + "\n\n\n")
@@ -280,9 +279,8 @@ def check_news()
             end
         #end for loop
         end
-                
-        puts "\n\nEnter the ID of the news item you want to read.\nTo exit, type 'exit'.\n\n>"
-        readchoice = gets().downcase.chomp!
+
+        readchoice = input("Enter the ID of the news item you want to read.\nTo exit, type 'exit'.")
                 
         # if the player hits the ENTER key without selecting a newsitem, he goes back the home screen
         if readchoice.empty?
@@ -314,26 +312,22 @@ def check_mail()
   #TODO: Stupid globals?
   messagelist = $messagelist
   
-  
-    #global has_new_email#TODO: use has_new_mail as a function parameter instead of a global? -- like check_news()?
     mailchoice = "None"
     while mailchoice != "exit"
         # display the appropriate mail screen, depending on new mail/no new mail
         if $has_new_email == 1
-          puts $mail_screen_hasmail
-            mailchoice = gets().downcase.chop!
+            mailchoice = input($mail_screen_hasmail)
         elsif $has_new_email == 0
-          puts $mail_screen_nomail
-            mailchoice = gets().downcase.chop!
+            mailchoice = input($mail_screen_nomail)
         end
         
         if mailchoice == "send"
-            pass#TODO: implement a send option?  Maybe not?  ("I'm writing from a throwaway address...etc")
+            puts "You haven't implemented a send option!"
         end
         
         if mailchoice == "read"
             readchoice = "None"
-            while readchoice.downcase != "exit"
+            while readchoice != "exit"
                 
                 # puts the header for the e-mail list
                 puts("ID:    From:                         Subject:                      "+"\n")
@@ -345,14 +339,13 @@ def check_mail()
                         puts(message.id+"      "+message.senderemail+"    "+message.subj)
                     end
                 end
-                puts "\n\nEnter the message ID of the e-mail you want to read.\nTo exit, type 'exit'.\n\n>"
-                readchoice = gets().downcase.chomp!
-             #while end
-             end
+
+
+             readchoice = input("Enter the message ID of the e-mail you want to read.\nTo exit, type 'exit'.")
                 
-                # if the player hits ENTER without selecting a mail item, he goes back to the home screen
-                if readchoice.empty?
-                    break
+             # if the player hits ENTER without selecting a mail item, he goes back to the home screen
+             if readchoice.empty?
+                 break
                 
                 else
                     # check the player input against each message-ID to find a match
@@ -367,6 +360,8 @@ def check_mail()
                     end
                 end
             end
+         #while end
+         end
 #while end
 end
 # def end
@@ -381,10 +376,8 @@ def thenet(time_left)
     
     
     playerchoice = "None"
-    while playerchoice.downcase != "logoff"
-        puts $home_screen
-        puts "> "
-        playerchoice = gets().downcase.chop!
+    while playerchoice != "logoff"
+        playerchoice = input($home_screen)
         
         #make the player's choice
         if playerchoice == "mail"

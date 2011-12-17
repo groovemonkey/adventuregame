@@ -84,8 +84,11 @@ class Location
   
   
   def choose_option(userinput)
-    #TODO: add error checking loop, etc
-    @choices[userinput].choose
+    if @choices[userinput]
+      @choices[userinput].choose
+    else
+      puts "\nYou're just kidding of course.  You wouldn't #{userinput} -- surely not right now, and definitely not right here.\n\n"
+    end
   end
   
 end

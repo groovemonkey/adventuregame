@@ -44,10 +44,10 @@ until playerchoice == "quit"
         "
     #if the player just hits "enter"
     elsif playerchoice == ""
-        print $PLAYER.currentlocation.desc #just tell him about where he is again
+        puts "You have to make a choice."
     
     elsif playerchoice == 'look'
-        print $PLAYER.currentlocation.desc
+        "You look around."
   
     else
     # execute the player's choice
