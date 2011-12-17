@@ -29,11 +29,12 @@ I think we'll be OK.  I'll contact you again when I can.
 unlocked=true
 )
 
-messagelist = [mesg1]
+$messagelist = [mesg1]
 
 
 ## Newsitem class
 class Newsitem
+  attr_accessor :id, :date, :headline, :body
     def initialize(id, date, headline, body)
         @id = id
         @date = date
@@ -60,7 +61,7 @@ for some time now.
 "
 )
 
-newslist = {1 => newsitem1}
+$newslist = {1 => newsitem1}
 
 
 ## Dossier Class
@@ -263,39 +264,44 @@ end
 #######################################
 
 # news loop -- TODO: by current date?
-def check_news(time_left, newslist)
-    
+def check_news()
+    #TODO is this stupid?  Globals?
+    newslist = $newslist
+    time_left = $time_left
     readchoice = "None"
-    while readchoice.lower() != "exit"
+    while readchoice.downcase != "exit"
         puts("ID   Headline\n")
-        for key in newslist
+        for key, value in newslist
             #list only news items that have already happened.  -- TODO: modify date format
             if key.to_i < time_left.to_i
                 
                 # display the newsitem ID and headline, side-by-side, for each news item
                 puts(newslist[key].id + "    " + newslist[key].headline)#TODO: sort by date
-                puts "\n\nEnter the ID of the news item you want to read.\nTo exit, type 'exit'.\n\n>"
-                readchoice = gets().downcase.chomp!
+            end
+        #end for loop
+        end
                 
-                # if the player hits the ENTER key without selecting a newsitem, he goes back the home screen
-                if readchoice.empty?
+        puts "\n\nEnter the ID of the news item you want to read.\nTo exit, type 'exit'.\n\n>"
+        readchoice = gets().downcase.chomp!
+                
+        # if the player hits the ENTER key without selecting a newsitem, he goes back the home screen
+        if readchoice.empty?
                     break
                 
-                # otherwise take the input, find the corresponding key, and get the news-object for that key
-                else
-                    for key in newslist
-                        if str(key) == readchoice
+        # otherwise take the input, find the corresponding key, and get the news-object for that key
+        else
+          for key, value in newslist
+            if key.to_s == readchoice
                             
                             # puts the date, headline, and body of the newsitem -- wait for input to go back to main news list
                             puts("\n\nPosted on " + newslist[key].date)
                             puts("Headline: " + newslist[key].headline)
                             puts(newslist[key].body + "\n\n\n")
                             gets()
-                        end
-                    end
-                end
             end
+          end
         end
+
 # end while
 end
 # end def
@@ -305,6 +311,10 @@ end
 
 # mail loop
 def check_mail()
+  #TODO: Stupid globals?
+  messagelist = $messagelist
+  
+  
     #global has_new_email#TODO: use has_new_mail as a function parameter instead of a global? -- like check_news()?
     mailchoice = "None"
     while mailchoice != "exit"
@@ -366,6 +376,10 @@ end
 
 # internet game loop
 def thenet(time_left)
+    #TODO Stupid global?
+    $time_left = time_left
+    
+    
     playerchoice = "None"
     while playerchoice.downcase != "logoff"
         puts $home_screen
@@ -377,7 +391,7 @@ def thenet(time_left)
             check_mail()
         
         elsif playerchoice == "news"
-            check_news(time_left, newslist)
+            check_news()
             
         elsif playerchoice == "research"
             do_research()

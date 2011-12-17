@@ -1,10 +1,12 @@
 In no particular order:
 
--thenet -- full testing; get it working properly
--put existing locations from /code/adventuregame into the location file --
-		(read the old location class, read in the file, and port it over into new location-class objects.  save normally.)
+-implement a "commands to run" proc/block for choices.  Each choice has either a "pass" or some code in its block,
+	and the blocks are run automatically from the makechoice function.
 
--port content from old adventuregame
+-thenet -- full testing; get it working properly
+		--mail broken
+		--research broken
+		--news FIXED
 
 -locations -- add a "save" method that writes the current state of the location
 -abstract the editing functions out of the adventuregame Location class code (just open and edit the classes in
@@ -14,11 +16,11 @@ In no particular order:
 -player input handling (use code from old adventuregame)
 -main screen
 -ability to save and load games
-
+-port content from old adventuregame (strip all useful code out)
 
 
 DONE:
 -split game files!! locations in a separate file.
 -added thenet as a separate location, special input handling for "choose" function to differentiate between
 a regular location and "thenet"
-
+-put existing locations from /code/adventuregame into the location file
