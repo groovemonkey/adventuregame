@@ -5,12 +5,13 @@ require_relative "Player"
 # choices dict for each location: choices = {"command" => choice-object, "command2" => choice-object2}
 
 class Choice
-  attr_accessor :choice_description, :location_exit, :making_choice_description
+  attr_accessor :choice_description, :location_exit, :making_choice_description, :choice_actions
   
-  def initialize(choice_description, location_exit, making_choice_description)
+  def initialize(choice_description, location_exit, making_choice_description, choice_actions)
     @choice_description = choice_description
     @location_exit = location_exit
     @making_choice_description = making_choice_description
+    @choice_actions = choice_actions
   end
   
   def display_choice(command)
@@ -19,8 +20,9 @@ class Choice
   
   def choose
     puts @making_choice_description
+    # call the 'actions' proc for the choice
+    @choice_actions.call
     if @location_exit == ""
-      puts "DEBUG: Back to the location you were in."
     elsif @location_exit == "thenet"
       thenet(50)
     else
@@ -51,7 +53,6 @@ class Location
   
   def list_choices
     #splits the {"command" => choiceobject} dict and passes the cmd to the display_choice function for the player.
-    puts "\nWhat would you like to do now?\n\n"
     @choices.each { |cmd, choice|
       choice.display_choice(cmd)
     }

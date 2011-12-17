@@ -3,35 +3,57 @@ require_relative "Location"
 
 eval File.read('content/locations.rb')
 eval File.read('content/thenet.rb')
+eval File.read('UI.rb')
+eval File.read('daveutils.rb')
 
-
-# instantiate player global
+# instantiate globals
+game_UI = UserInterface.new
+$TIME = 50
 Player1 = Player.new
 
-#TODO: Debug -- make this a string, and make sure string input can lookup the correct location to go to next.
-# looks like change_location will have to take a string as input and do the lookup to see which loc has that name
-Player1.change_location("testlocation")
+# pick starting location
+Player1.change_location("viennapub")
 
 ############
 ## MAIN LOOP
 ############
 
-playerinput = ""
-until playerinput == "quit"
+playerchoice = ""
+until playerchoice == "quit"
   # give the description from the player's currentlocation
   Player1.currentlocation.tell_story
   Player1.currentlocation.list_choices
   
   # take input
-  #TODO: implement the get_player_input function
-  print "\n\n"
-  playerinput = gets().chomp!
+  playerchoice = input("Now What? (this is being called from the main loop)")
   
-  #TODO: handle administrative player input
+    if playerchoice == 'quit'
+        #running = false
+        break
+    
+    elsif playerchoice == 'help'
+        game_UI.helpmenu
+    
+    elsif playerchoice == 'time'
+        puts "
+        
+        In a smooth motion that suggests you're simply scratching a small 
+        itch behind your ear, you bring up the countdown timer on your 
+        Heads-Up Display.  It looks like you've used up about #{$TIME} units of time
+        
+        "
+    #if the player just hits "enter"
+    elsif playerchoice == ""
+        print $PLAYER.currentlocation.desc #just tell him about where he is again
+    
+    elsif playerchoice == 'look'
+        print $PLAYER.currentlocation.desc
   
-  
-  # execute the player's choice
-  Player1.currentlocation.choose_option(playerinput)
+    else
+    # execute the player's choice
+    Player1.currentlocation.choose_option(playerchoice)
+    end
+
 
 #end "until" game loop
 end

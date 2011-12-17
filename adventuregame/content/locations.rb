@@ -1,38 +1,4 @@
-Locations = {"testlocation" => Location.new(
-        description="you are standing in a test location, looking around at the blank white nothingness.",
-        choices = {"go to loc1" => Choice.new(
-                  choice_description="You go to vienna",
-                  location_exit="loc1",
-                  making_choice_description="You run to the nearest airport, buy a ticket, and get on a plane to Vienna."
-            ),}),
-
-"vienna" => Location.new(
-        description="you are surrounded by an old, beautiful city.  Yay!",
-        choices = {"go to testlocation" => Choice.new(
-                  choice_description="swing back to the nothingness",
-                  location_exit="testlocation",
-                  making_choice_description="You suddenly cease to exist in the normal world."
-            ),"go to the countryside" => Choice.new(
-                  choice_description="head out to the 'wink",
-                  location_exit="rekawinkel",
-                  making_choice_description="you drive out into the countryside"
-            ),}),
-
-"rekawinkel" => Location.new(
-        description="it's gorgeous!  You're on a huge meadow, facing a large old stone house.",
-        choices = {"enter house" => Choice.new(
-                  choice_description="try to enter the old house",
-                  location_exit="",
-                  making_choice_description="you try entering the old house, but find all entrances locked tight."
-            ),"frolick" => Choice.new(
-                  choice_description="",
-                  location_exit="",
-                  making_choice_description="you frolick on the meadow!"
-            ),"drive to city" => Choice.new(
-                  choice_description="you drive back to vienna, refreshed after your jaunt to the countryside.",
-                  location_exit="vienna",
-                  making_choice_description="you drive back to the city, refreshed after your jaunt to the countryside."
-            ),}),
+Locations = {
 
 "loc1" => Location.new(
         description="
@@ -56,8 +22,10 @@ West is a computer terminal -- exactly what you're looking for.
 There's nothing here except for a huge room lined with computer terminals,
 and the people jacked into them.
 
-"
-            ),"east" => Choice.new(
+",
+                  choice_actions = Proc.new {}),
+
+"east" => Choice.new(
                   choice_description="exit to city",
                   location_exit="viennapub",
                   making_choice_description="
@@ -67,7 +35,8 @@ better.
 
 You're back in the city.
 
-"
+",
+                  choice_actions = Proc.new {}
             ),
             "south" => Choice.new(
                   choice_description="",
@@ -77,7 +46,8 @@ You're back in the city.
 There's nothing here except for a huge room lined with computer terminals,
 and the people jacked into them.
 
-"
+",
+                  choice_actions = Proc.new {}
             ),
             "west" => Choice.new(
                   choice_description="log on to the net",
@@ -88,7 +58,8 @@ You sit down at the empty computer terminal, make sure the connectors are
 clean, and jack into the Net.  A familiar rush washes over you, and the
 noise of the Cyber-Cafe crowds disappears.
 
-"
+",
+                  choice_actions = Proc.new {}
             ),}),
             
 "viennapub" => Location.new(
@@ -137,7 +108,8 @@ surround you.
 You feel peaceful.  After your beer, you pay your tab and head back to 
 the front of the pub.
 
-"
+",
+                  choice_actions = Proc.new {}
             ),"east" => Choice.new(
                   choice_description="go downstairs",
                   location_exit="loc2x1",
@@ -149,7 +121,8 @@ provides flickering illumination for you.
 
 You are alone.
 
-"
+",
+                  choice_actions = Proc.new {}
             ),
             "south" => Choice.new(
                   choice_description="Exit",
@@ -158,7 +131,8 @@ You are alone.
 
 You head out the front door, into the streets of vienna.  It is night, and there is a cool, dewy smell in the air.
 
-"
+",
+                  choice_actions = Proc.new {}
             ),
             "west" => Choice.new(
                   choice_description="jack into the net",
@@ -180,7 +154,8 @@ Then, another layer of information flows down over what your eyes are taking in.
 You're jacked into the net.
 
 
-"
+",
+                  choice_actions = Proc.new {}
             ),}),
             
 "loc2x1" => Location.new(
@@ -208,7 +183,8 @@ You take a look around the mens' bathroom.  It's spartan; two urinals and
 a rickety toilet stall.  You don't have to take a leak right now, so you 
 head back outside.
 
-"
+",
+                  choice_actions = Proc.new {}
             ),"east" => Choice.new(
                   choice_description="check women's bathroom",
                   location_exit="loc2x2",
@@ -219,7 +195,8 @@ it anyway.  Slowly, you peek into the women's room to make sure it's empty.
 Then you step inside.
 
 
-"
+",
+                  choice_actions = Proc.new {}
             ),
             "south" => Choice.new(
                   choice_description="go back upstairs",
@@ -230,7 +207,8 @@ You put your hands in your pockets and walk back up the stairs, whistling a
 tune and avoiding eye contact.  Upstairs, you relax and take in your 
 surroundings.
 
-"
+",
+                  choice_actions = Proc.new {}
             ),
             "west" => Choice.new(
                   choice_description="examine keypad",
@@ -245,7 +223,8 @@ can't tell if they are electrical or data wires.
 
 Shrugging your shoulders, you step away from the door.
 
-"
+",
+                  choice_actions = Proc.new {}
             ),}),
             
 "loc2x2" => Location.new(
@@ -270,7 +249,9 @@ Nothing, just some empty toilet stalls.  Everything looks worn, and the walls
 have names, phone numbers, and messages scrawled on them -- none of it is even 
 remotely intelligible.
 
-"
+",
+                  choice_actions = Proc.new {}
+                  
             ),"east" => Choice.new(
                   choice_description="examine sinks",
                   location_exit="loc2x2",
@@ -291,7 +272,8 @@ lines of born as a cube and then flattened a bit.  Close enough.
 
 You take a step back, and decide what to do next.
 
-"
+",
+                  choice_actions = Proc.new {}
             ),
             "south" => Choice.new(
                   choice_description="",
@@ -301,7 +283,8 @@ You take a step back, and decide what to do next.
 Nothing, just a wall.  Some of the paint has been scratched off over the 
 years, revealing brick underneath.
 
-"
+",
+                  choice_actions = Proc.new {}
             ),
             "west" => Choice.new(
                   choice_description="leave bathroom",
@@ -319,13 +302,15 @@ down here.
 
 Still alone.
 
-"
+",
+                  choice_actions = Proc.new {}
             ),
             
 "west" => Choice.new(
                   choice_description="take datacube",
-                  location_exit="loc2x1",
-                  making_choice_description="You make a quick scan of the datacube, cloning the data and storing it for later."
+                  location_exit="",
+                  making_choice_description="You make a quick scan of the datacube, cloning the data and storing it for later.",
+                  choice_actions = Proc.new { puts "You added the datacube to your inventory!"}
           ),}),
             
             

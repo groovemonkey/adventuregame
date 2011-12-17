@@ -1,8 +1,5 @@
 In no particular order:
 
--implement a "commands to run" proc/block for choices.  Each choice has either a "pass" or some code in its block,
-	and the blocks are run automatically from the makechoice function.
-
 -thenet -- full testing; get it working properly
 		--mail broken
 		--research broken
@@ -18,9 +15,11 @@ In no particular order:
 -ability to save and load games
 -port content from old adventuregame (strip all useful code out)
 
-
+#############################
 DONE:
 -split game files!! locations in a separate file.
 -added thenet as a separate location, special input handling for "choose" function to differentiate between
 a regular location and "thenet"
 -put existing locations from /code/adventuregame into the location file
+-implement a "commands to run" proc/block for choices.  Each choice has a proc (empty if no action is needed for that choice),
+	and the blocks are run automatically from the Choice.choose() function.
